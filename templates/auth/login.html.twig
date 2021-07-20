@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login
+{% endblock %}
+
+{# {% form_theme ****formNameHERE****** 'bootstrap_5_layout.html.twig' %} #}
+
+
+{% block body %}
+	<style></style>
+
+	<div class="container">
+		<div class="row m-5">
+			<div class="col-6-md col-4-sm">
+				<h3 class="text-center">Login</h3>
+				<form
+					action="" method="post">
+					{# name #}
+					<div class="form-group mt-2">
+						<label class="me-3" for="_username">User Name</label><input type="text" id="_username" name="_username"></div>
+
+					<div class="form-group mt-2">
+						<label class="me-3" for="password">Password</label><input id="password" type="password" name="_password"></div>
+
+					<div class="form-group mt-2">
+						<button class="btn btn-success btn-sm mt-2" type="submit">Login</button>
+					</div>
+				</form>
+
+				<a class="btn btn-primary btn-sm mt-2" href="{{path('register')}}">Register</a>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

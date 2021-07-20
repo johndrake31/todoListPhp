@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TodoList!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row p-5">
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title">To Do:
+					</h5>
+					<p class="card-text">{{ todo.description }}</p>
+					<a class="btn btn-sm btn-warning" href="{{path('todo')}}">Edit</a>
+					<a class="btn btn-sm btn-danger" href="{{path('todo')}}">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

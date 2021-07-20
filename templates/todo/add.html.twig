@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Todo!
+{% endblock %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+
+{% block body %}
+	<div class="container">
+		<div class="row p-5">
+			{{form_start(form)}}
+
+
+			{{form_row(form.description)}}
+			{{form_row(form.dueDate)}}
+
+			<button class="btn btn-success" type="submit">Add Todo</button>
+			{{form_end(form)}}
+		</div>
+	</div>
+
+{% endblock %}

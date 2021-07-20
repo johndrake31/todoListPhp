@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TodoList!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row p-5">
+			{% for todo in todos %}
+				{% if app.user %}
+					{% if app.user.username is same as(todo.user.username)  %}
+
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">To Do:
+								</h5>
+								<p class="card-text">{{ todo.description }}</p>
+								<a class="btn btn-sm btn-info" href="{{path('show', {id: todo.id})}}">See More</a>
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+
+
+{% endblock %}
