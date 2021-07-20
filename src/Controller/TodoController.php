@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Todo;
+use App\Entity\User;
 use App\Form\TodoType;
 use App\Repository\TodoRepository;
 use Doctrine\ORM\EntityManagerInterface as EMI;
@@ -17,9 +18,10 @@ class TodoController extends AbstractController
     /**
      *@Route("/todo", name="todo")
      */
-    public function index(TodoRepository $repo): Response
+    public function index(UserInterface $user): Response
     {
-        $todos = $repo->findAll();
+
+        $todos = $user->getTodos();
 
 
         return $this->render('todo/index.html.twig', [
