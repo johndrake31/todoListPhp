@@ -17,7 +17,7 @@ class TodoController extends AbstractController
     /**
      *@Route("/todo", name="todo")
      */
-    public function index(TodoRepository $repo, UserInterface $user): Response
+    public function index(TodoRepository $repo): Response
     {
         $todos = $repo->findAll();
 
@@ -29,6 +29,7 @@ class TodoController extends AbstractController
 
     /**
      *@Route("/todo/add", name="add_todo")
+     *@Route("/todo/edit/{id}", name="edit_todo")
      */
     public function add(Todo $todo = null, Request $req, EMI $emi, UserInterface $user): Response
     {
@@ -47,6 +48,7 @@ class TodoController extends AbstractController
                 $todo->setCreatedAt(new \DateTime());
                 $todo->setUser($user);
             }
+
             if (!$createMode) {
                 if ($user != $todo->getUser()) {
                     return $this->redirectToRoute('add_todo');
@@ -62,6 +64,19 @@ class TodoController extends AbstractController
         return $this->render('todo/add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * 
+     * @Route("/todo/delete/{id}", name="delete_todo")
+     */
+    public function delete(Todo $todo, EMI $em, UserInterface $user): Response
+    {
+        if ($user == $todo->getUser()) {
+            $em->remove($todo);
+            $em->flush();
+        }
+        return $this->redirect('/todo');
     }
 
     /**
