@@ -5,18 +5,37 @@
 
 {% block body %}
 	<div class="container">
+		<a style="width: 120px;" class="btn btn-sm btn-dark" href="{{path('newiest_todo', {newiest: 'newiest'})}}">order by newiest</a>
 		<div class="row p-5">
+
+
 			{% for todo in todos %}
 				{% if app.user %}
-					<div class="card me-2" style="width: 18rem;">
+					{% if date(todo.dueDate) < date() %}
+						{% set color = 'red' %}
+					{% else %}
+						{% set color = 'none' %}
+
+					{% endif %}
+
+					<div style="background-color: {{color}}" class="card me-2 " style="width: 18rem;">
+
 						<div class="card-body">
 							<h5 class="card-title">To Do:
 							</h5>
 							<p class="card-text">{{ todo.description }}</p>
+
+
 							<p class="card-text">
 								<small>
 									do by:
 									{{ todo.dueDate|date('d-m-Y') }}
+								</small>
+							</p>
+							<p class="card-text">
+								<small>
+									Created on:
+									{{ todo.createdAt|format_datetime() }}
 								</small>
 							</p>
 

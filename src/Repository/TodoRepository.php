@@ -22,7 +22,7 @@ class TodoRepository extends ServiceEntityRepository
     /**
      * @return Todo[] Returns an array of Todo objects by date ASC
      */
-    public function findAllTodosByNewest($value)
+    public function findAllTodosSortByNewest($value)
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.user = :val')

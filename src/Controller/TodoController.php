@@ -17,11 +17,15 @@ class TodoController extends AbstractController
 {
     /**
      *@Route("/todo", name="todo")
+     *@Route("/todo/orderby/{newiest}", name="newiest_todo")
      */
-    public function index(UserInterface $user, TodoRepository $repo): Response
+    public function index(UserInterface $user, TodoRepository $repo, $newiest = null): Response
     {
-        dd($repo->findAllTodosByNewest($user));
         $todos = $user->getTodos();
+
+        if ($newiest) {
+            $todos = $repo->findAllTodosSortByNewest($user);
+        }
 
 
         return $this->render('todo/index.html.twig', [
@@ -29,19 +33,6 @@ class TodoController extends AbstractController
         ]);
     }
 
-    // /**
-    //  *@Route("/todo", name="todo")
-    //  */
-    // public function newest(UserInterface $user, TodoRepository $repo): Response
-    // {
-    //     // dd($repo->findAllTodosByNewest($user));
-    //     $todos = $user->getTodos();
-
-
-    //     return $this->render('todo/index.html.twig', [
-    //         'todos' => $todos,
-    //     ]);
-    // }
 
     /**
      *@Route("/todo/add", name="add_todo")
@@ -93,16 +84,5 @@ class TodoController extends AbstractController
             $em->flush();
         }
         return $this->redirect('/todo');
-    }
-
-    /**
-     *@Route("/todo/show/{id}", name="show")
-     */
-    public function show(Todo $todo): Response
-    {
-
-        return $this->render('todo/show.html.twig', [
-            'todo' => $todo
-        ]);
     }
 }
