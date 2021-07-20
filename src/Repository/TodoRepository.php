@@ -19,6 +19,20 @@ class TodoRepository extends ServiceEntityRepository
         parent::__construct($registry, Todo::class);
     }
 
+    /**
+     * @return Todo[] Returns an array of Todo objects by date ASC
+     */
+    public function findAllTodosByNewest($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(1000)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Todo[] Returns an array of Todo objects
     //  */

@@ -18,9 +18,9 @@ class TodoController extends AbstractController
     /**
      *@Route("/todo", name="todo")
      */
-    public function index(UserInterface $user): Response
+    public function index(UserInterface $user, TodoRepository $repo): Response
     {
-
+        dd($repo->findAllTodosByNewest($user));
         $todos = $user->getTodos();
 
 
@@ -28,6 +28,20 @@ class TodoController extends AbstractController
             'todos' => $todos,
         ]);
     }
+
+    // /**
+    //  *@Route("/todo", name="todo")
+    //  */
+    // public function newest(UserInterface $user, TodoRepository $repo): Response
+    // {
+    //     // dd($repo->findAllTodosByNewest($user));
+    //     $todos = $user->getTodos();
+
+
+    //     return $this->render('todo/index.html.twig', [
+    //         'todos' => $todos,
+    //     ]);
+    // }
 
     /**
      *@Route("/todo/add", name="add_todo")
