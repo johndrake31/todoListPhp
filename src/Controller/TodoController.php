@@ -17,26 +17,27 @@ class TodoController extends AbstractController
 {
     /**
      *@Route("/todo", name="todo")
-     *@Route("/todo/orderby/{orderByCreation}", name="orderByCreation_todo")
+     *@Route("/todo/orderby/{orderByCreation}", name="orderBy_todo")
      */
     public function index(UserInterface $user, TodoRepository $repo, $orderByCreation = null): Response
     {
+
         $todos = $user->getTodos();
 
-
-        if ($orderByCreation === 'oldiest') {
-            $todos = $repo->findAllTodosSortByOldest($user);
+        switch ($orderByCreation){
+            case "oldiest":
+                $todos = $repo->findAllTodosSortByOldest($user);;
+                break;
+            case "newiest":
+                $todos = $repo->findAllTodosSortByNewest($user);;
+                break;
+            case "dueNewiest":
+                $todos = $repo->findAllTodosSortByDueByNew($user);
+                break;
+            case "dueOldiest":
+                $todos = $repo->findAllTodosSortByDueByOld($user);
+                break;
         }
-        if ($orderByCreation === 'newiest') {
-            $todos = $repo->findAllTodosSortByNewest($user);
-        }
-        if ($orderByCreation === 'dueNewiest') {
-            $todos = $repo->findAllTodosSortByDueByNew($user);
-        }
-        if ($orderByCreation === 'dueOldiest') {
-            $todos = $repo->findAllTodosSortByDueByOld($user);
-        }
-
 
         return $this->render('todo/index.html.twig', [
             'todos' => $todos,

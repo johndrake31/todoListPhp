@@ -7,56 +7,60 @@
 	<div class="container">
 		<div class="row bg-dark p-2">
 			<div class="d-flex">
-				<a style="min-width: 120px;" class="btn btn-sm btn-warning me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'newiest'})}}">order by newiest</a>
-				<a style="min-width: 120px;" class="btn btn-sm btn-light me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'oldiest'})}}">order by oldiest</a>
-				<a style="min-width: 120px;" class="btn btn-sm btn-info me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'dueNewiest'})}}">Not Urgent Due Date</a>
-				<a style="min-width: 120px;" class="btn btn-sm btn-danger me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'dueOldiest'})}}">Urgent Due Date</a>
-			</div>
-		</div>
-
-
-		<div class="row p-5">
-
-
-			{% for todo in todos %}
-				{% if app.user %}
-					{% if date(todo.dueDate) < date() %}
-						{% set color = 'red' %}
-					{% else %}
-						{% set color = 'none' %}
-
-					{% endif %}
-
-					<div style="background-color: {{color}}" class="card me-2 " style="width: 18rem;">
-
-						<div class="card-body">
-							<h5 class="card-title">To Do:
-							</h5>
-							<p class="card-text">{{ todo.description }}</p>
-
-
-							<p class="card-text">
-								<small>
-									do by:
-									{{ todo.dueDate|date('d-m-Y') }}
-								</small>
-							</p>
-							<p class="card-text">
-								<small>
-									Created on:
-									{{ todo.createdAt|format_datetime() }}
-								</small>
-							</p>
-
-
-							<a class="btn btn-sm btn-warning" href="{{path('edit_todo', {id: todo.id})}}">Edit</a>
-							<a class="btn btn-sm btn-danger" href="{{path('delete_todo', {id: todo.id})}}">Delete</a>
-						</div>
+				<h3 class="text-white me-2" style="max-width: 320px">
+					<u>TODO LIST</u></h3>
+						<a style="min-width: 120px;" class="btn btn-sm btn-warning me-1" href="{{path('orderBy_todo', {orderByCreation: 'newiest'})}}">order by newiest</a>
+						<a style="min-width: 120px;" class="btn btn-sm btn-light me-1" href="{{path('orderBy_todo', {orderByCreation: 'oldiest'})}}">order by oldiest</a>
+						<a style="min-width: 120px;" class="btn btn-sm btn-info me-1" href="{{path('orderBy_todo', {orderByCreation: 'dueNewiest'})}}">Not Urgent Due Date</a>
+						<a style="min-width: 120px;" class="btn btn-sm btn-danger me-1" href="{{path('orderBy_todo', {orderByCreation: 'dueOldiest'})}}">Urgent Due Date</a>
 					</div>
-				{% endif %}
-			{% endfor %}
-		</div>
-	</div>
+				</div>
+
+				<div class="row p-5">
+					{% for todo in todos %}
+						{% if app.user %}
+							{% if date(todo.dueDate) < date() %}
+								{% set color = 'orange' %}
+							{% else %}
+								{% set color = 'none' %}
+
+							{% endif %}
+							<div class="col-4 p-1 ">
+								<div style="background-color: {{color}}" class="card border border-2 border-primary me-2 " style="width: 18rem;">
+									<div class="card-body">
+										<h4 class="card-title">To Do:
+										</h4>
+										{% if date(todo.dueDate) < date() %}
+											<div class="bg-dark p-2">
+												<h5 class="text-white text-center">OVER DUE!!!
+
+												</h5>
+											</div>
+										{% endif %}
+										<h5 class="text-decoration-none">{{ todo.description }}</h5>
+										<p class="card-text">
+											<small>
+												do by:
+												{{ todo.dueDate|date('d-m-Y') }}
+											</small>
+										</p>
+										<p class="card-text">
+											<small>
+												Created on:
+												{{ todo.createdAt|format_datetime() }}
+											</small>
+										</p>
+
+										<a class="btn btn-sm btn-warning" href="{{path('edit_todo', {id: todo.id})}}">Edit</a>
+										<a class="btn btn-sm btn-danger" href="{{path('delete_todo', {id: todo.id})}}">Delete</a>
+									</div>
+								</div>
+							</div>
+
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
 
 
-{% endblock %}
+		{% endblock %}
