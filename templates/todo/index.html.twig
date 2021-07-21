@@ -5,7 +5,16 @@
 
 {% block body %}
 	<div class="container">
-		<a style="width: 120px;" class="btn btn-sm btn-dark" href="{{path('newiest_todo', {newiest: 'newiest'})}}">order by newiest</a>
+		<div class="row bg-dark p-2">
+			<div class="d-flex">
+				<a style="min-width: 120px;" class="btn btn-sm btn-warning me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'newiest'})}}">order by newiest</a>
+				<a style="min-width: 120px;" class="btn btn-sm btn-light me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'oldiest'})}}">order by oldiest</a>
+				<a style="min-width: 120px;" class="btn btn-sm btn-info me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'dueNewiest'})}}">Not Urgent Due Date</a>
+				<a style="min-width: 120px;" class="btn btn-sm btn-danger me-1" href="{{path('orderByCreation_todo', {orderByCreation: 'dueOldiest'})}}">Urgent Due Date</a>
+			</div>
+		</div>
+
+
 		<div class="row p-5">
 
 

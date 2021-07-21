@@ -92,6 +92,7 @@ class User implements UserInterface
 
         return $this;
     }
+
     public function getPasswordConfirm(): ?string
     {
         return $this->passwordConfirm;

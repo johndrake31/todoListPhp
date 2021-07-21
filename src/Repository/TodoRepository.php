@@ -20,7 +20,7 @@ class TodoRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Todo[] Returns an array of Todo objects by date ASC
+     * @return Todo[] Returns an array of Todo objects by date DESC
      */
     public function findAllTodosSortByNewest($value)
     {
@@ -28,6 +28,48 @@ class TodoRepository extends ServiceEntityRepository
             ->andWhere('a.user = :val')
             ->setParameter('val', $value)
             ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(1000)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Todo[] Returns an array of Todo objects by date ASC
+     */
+    public function findAllTodosSortByOldest($value)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('b.createdAt', 'ASC')
+            ->setMaxResults(1000)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Todo[] Returns an array of Todo objects by Due Date DESC
+     */
+    public function findAllTodosSortByDueByNew($value)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('b.dueDate', 'DESC')
+            ->setMaxResults(1000)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Todo[] Returns an array of Todo objects by Due Date ASC
+     */
+    public function findAllTodosSortByDueByOld($value)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('b.dueDate', 'ASC')
             ->setMaxResults(1000)
             ->getQuery()
             ->getResult();

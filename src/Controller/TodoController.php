@@ -17,14 +17,24 @@ class TodoController extends AbstractController
 {
     /**
      *@Route("/todo", name="todo")
-     *@Route("/todo/orderby/{newiest}", name="newiest_todo")
+     *@Route("/todo/orderby/{orderByCreation}", name="orderByCreation_todo")
      */
-    public function index(UserInterface $user, TodoRepository $repo, $newiest = null): Response
+    public function index(UserInterface $user, TodoRepository $repo, $orderByCreation = null): Response
     {
         $todos = $user->getTodos();
 
-        if ($newiest) {
+
+        if ($orderByCreation === 'oldiest') {
+            $todos = $repo->findAllTodosSortByOldest($user);
+        }
+        if ($orderByCreation === 'newiest') {
             $todos = $repo->findAllTodosSortByNewest($user);
+        }
+        if ($orderByCreation === 'dueNewiest') {
+            $todos = $repo->findAllTodosSortByDueByNew($user);
+        }
+        if ($orderByCreation === 'dueOldiest') {
+            $todos = $repo->findAllTodosSortByDueByOld($user);
         }
 
 
