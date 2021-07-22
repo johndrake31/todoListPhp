@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}!
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container p-2">
+		<div
+			class="row">
+			{# {{ dump("ROLE_ADMIN" in app.user.roles) }} #}
+			{% for user in users %}
+				{% if app.user.username != user.username %}
+
+					<div class="card text-center border border-3 border-warning col-3 p-1 m-1">
+						<div class="card-header">
+							{% for role in user.roles %}
+								<p>{{role}}</p>
+							{% endfor %}
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">{{user.username}}</h5>
+							<p class="card-text">id:
+								{{user.id}}</p>
+							<p class="card-text">email:
+								{{user.email}}</p>
+
+						</div>
+						<div class="card-footer">
+							<a href="{{path('delete_user', {id: user.id})}}" class="btn btn-danger m-1">Delete User</a>
+							<a href="{{path('show_user_todos', {id: user.id})}}" class="btn btn-info m-1">User's Todos</a>
+
+
+						</div>
+					</div>
+				{% endif %}
+
+			{% endfor %}
+		</div>
+
+	</div>
+{% endblock %}

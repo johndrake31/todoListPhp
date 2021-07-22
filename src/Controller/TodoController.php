@@ -100,10 +100,18 @@ class TodoController extends AbstractController
      */
     public function delete(Todo $todo, EMI $em, UserInterface $user): Response
     {
-        if ($user == $todo->getUser()) {
+        $isAdmin = in_array("ROLE_ADMIN", $user->getRoles());
+
+        if ($user == $todo->getUser() || $isAdmin) {
+            $user2 = $todo->getUser();
+            $id = $user2->getId();
+
             $em->remove($todo);
             $em->flush();
         }
-        return $this->redirectToRoute('todo');
+        if ($isAdmin) {
+            return $this->redirect('/admin/todos/' . $id);
+        }
+        return $this->redirect('/admin/todos/3');
     }
 }
