@@ -6,12 +6,13 @@ use App\Entity\Todo;
 use App\Entity\User;
 use App\Form\TodoType;
 use App\Repository\TodoRepository;
-use Doctrine\ORM\EntityManagerInterface as EMI;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface as EMI;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  *@Route("/{_locale}")
@@ -22,7 +23,7 @@ class TodoController extends AbstractController
      *@Route("/todo", name="todo")
      *@Route("/todo/orderby/{orderByCreation}", name="orderBy_todo")
      */
-    public function index(UserInterface $user, TodoRepository $repo, $orderByCreation = null): Response
+    public function index(UserInterface $user, TodoRepository $repo, $orderByCreation = null, PaginatorInterface $paginator, Request $request): Response
     {
 
         $todos = $user->getTodos();
@@ -42,8 +43,14 @@ class TodoController extends AbstractController
                 break;
         }
 
+        $pagination = $paginator->paginate(
+            $todos, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            4 /*limit per page*/
+        );
+
         return $this->render('todo/index.html.twig', [
-            'todos' => $todos,
+            'todos' => $pagination,
         ]);
     }
 

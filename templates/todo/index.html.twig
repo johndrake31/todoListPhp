@@ -66,6 +66,11 @@
 
 				{% endif %}
 			{% endfor %}
+			<div class="navigation">
+				{{ knp_pagination_render(todos, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+
+			</div>
+
 		</div>
 	</div>
 
