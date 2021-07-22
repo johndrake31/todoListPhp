@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="xwYQJiS" resname="modifier">
+        <source>modifier</source>
+        <target>modifier</target>
+      </trans-unit>
+      <trans-unit id="EyE14AQ" resname="suppr">
+        <source>suppr</source>
+        <target>supprimer</target>
+      </trans-unit>
+      <trans-unit id="Hkfq5jO" resname="leplusancien">
+        <source>leplusancien</source>
+        <target>Le plus ancien</target>
+      </trans-unit>
+      <trans-unit id="v65HbYM" resname="leplusrecent">
+        <source>leplusrecent</source>
+        <target>le plus récent</target>
+      </trans-unit>
+      <trans-unit id="hkL.ym1" resname="nonurgent">
+        <source>nonurgent</source>
+        <target>non urgent</target>
+      </trans-unit>
+      <trans-unit id="_dN8I.z" resname="urgent">
+        <source>urgent</source>
+        <target>urgent</target>
+      </trans-unit>
+      <trans-unit id="zOrs5FI" resname="pourfaire">
+        <source>pourfaire</source>
+        <target>Pour faire</target>
+      </trans-unit>
+      <trans-unit id="iAkgLAg" resname="deconnexion">
+        <source>deconnexion</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="d8ICUnd" resname="ajouterafaire">
+        <source>ajouterafaire</source>
+        <target>ajouter à faire</target>
+      </trans-unit>
+      <trans-unit id="QDu1yJp" resname="bienvenue">
+        <source>bienvenue</source>
+        <target>Bienvenue!</target>
+      </trans-unit>
+      <trans-unit id="tUKhz_F" resname="connexion">
+        <source>connexion</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="TnsxF1o" resname="identifiant">
+        <source>identifiant</source>
+        <target>Identifiant</target>
+      </trans-unit>
+      <trans-unit id="3RATGlD" resname="inscrire">
+        <source>inscrire</source>
+        <target>s'inscrire</target>
+      </trans-unit>
+      <trans-unit id="9PJj5Dn" resname="mdp">
+        <source>mdp</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

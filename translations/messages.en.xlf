@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="EyE14AQ" resname="suppr">
+        <source>suppr</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="xwYQJiS" resname="modifier">
+        <source>modifier</source>
+        <target>edit</target>
+      </trans-unit>
+      <trans-unit id="zOrs5FI" resname="pourfaire">
+        <source>pourfaire</source>
+        <target>To Do</target>
+      </trans-unit>
+      <trans-unit id="iAkgLAg" resname="deconnexion">
+        <source>deconnexion</source>
+        <target>logout</target>
+      </trans-unit>
+      <trans-unit id="d8ICUnd" resname="ajouterafaire">
+        <source>ajouterafaire</source>
+        <target>add to do</target>
+      </trans-unit>
+      <trans-unit id="QDu1yJp" resname="bienvenue">
+        <source>bienvenue</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id="tUKhz_F" resname="connexion">
+        <source>connexion</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="TnsxF1o" resname="identifiant">
+        <source>identifiant</source>
+        <target>username</target>
+      </trans-unit>
+      <trans-unit id="3RATGlD" resname="inscrire">
+        <source>inscrire</source>
+        <target>sign-up</target>
+      </trans-unit>
+      <trans-unit id="9PJj5Dn" resname="mdp">
+        <source>mdp</source>
+        <target>password</target>
+      </trans-unit>
+
+      <trans-unit id="Hk3q5jO" resname="leplusancien">
+        <source>leplusancien</source>
+        <target>oldest</target>
+      </trans-unit>
+      <trans-unit id="v653bYM" resname="leplusrecent">
+        <source>leplusrecent</source>
+        <target>newest</target>
+      </trans-unit>
+      <trans-unit id="hkL3ym1" resname="nonurgent">
+        <source>nonurgent</source>
+        <target>non urgent</target>
+      </trans-unit>
+      <trans-unit id="_dN83.z" resname="urgent">
+        <source>urgent</source>
+        <target>important</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

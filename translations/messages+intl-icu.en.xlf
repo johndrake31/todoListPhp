@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="4tClSWj" resname="Delete">
+        <source>Delete</source>
+        <target>__Delete</target>
+      </trans-unit>
+      <trans-unit id="v65HbYM" resname="leplusrecent">
+        <source>leplusrecent</source>
+        <target>__leplusrecent</target>
+      </trans-unit>
+      <trans-unit id="Hkfq5jO" resname="leplusancien">
+        <source>leplusancien</source>
+        <target>__leplusancien</target>
+      </trans-unit>
+      <trans-unit id="hkL.ym1" resname="nonurgent">
+        <source>nonurgent</source>
+        <target>__nonurgent</target>
+      </trans-unit>
+      <trans-unit id="_dN8I.z" resname="urgent">
+        <source>urgent</source>
+        <target>__urgent</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

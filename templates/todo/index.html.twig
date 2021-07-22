@@ -5,62 +5,69 @@
 
 {% block body %}
 	<div class="container">
+
 		<div class="row bg-dark p-2">
 			<div class="d-flex">
 				<h3 class="text-white me-2" style="max-width: 320px">
-					<u>TODO LIST</u></h3>
-						<a style="min-width: 120px;" class="btn btn-sm btn-warning me-1" href="{{path('orderBy_todo', {orderByCreation: 'newiest'})}}">order by newiest</a>
-						<a style="min-width: 120px;" class="btn btn-sm btn-light me-1" href="{{path('orderBy_todo', {orderByCreation: 'oldiest'})}}">order by oldiest</a>
-						<a style="min-width: 120px;" class="btn btn-sm btn-info me-1" href="{{path('orderBy_todo', {orderByCreation: 'dueNewiest'})}}">Not Urgent Due Date</a>
-						<a style="min-width: 120px;" class="btn btn-sm btn-danger me-1" href="{{path('orderBy_todo', {orderByCreation: 'dueOldiest'})}}">Urgent Due Date</a>
-					</div>
-				</div>
+					<u>TODO LIST</u>
+				</h3>
+				<a style="min-width: 120px;" class="btn btn-sm btn-warning me-1" href="{{path('orderBy_todo', {orderByCreation: 'newiest'})}}">{{'leplusrecent'|trans}}</a>
 
-				<div class="row p-5">
-					{% for todo in todos %}
-						{% if app.user %}
-							{% if date(todo.dueDate) < date() %}
-								{% set color = 'orange' %}
-							{% else %}
-								{% set color = 'none' %}
+				<a style="min-width: 120px;" class="btn btn-sm btn-light me-1" href="{{path('orderBy_todo', {orderByCreation: 'oldiest'})}}">{{'leplusancien'|trans}}</a>
 
-							{% endif %}
-							<div class="col-4 p-1 ">
-								<div style="background-color: {{color}}" class="card border border-2 border-primary me-2 " style="width: 18rem;">
-									<div class="card-body">
-										<h4 class="card-title">To Do:
-										</h4>
-										{% if date(todo.dueDate) < date() %}
-											<div class="bg-dark p-2">
-												<h5 class="text-white text-center">OVER DUE!!!
+				<a style="min-width: 120px;" class="btn btn-sm btn-info me-1" href="{{path('orderBy_todo', {orderByCreation: 'dueNewiest'})}}">{{'nonurgent'|trans}}</a>
 
-												</h5>
-											</div>
-										{% endif %}
-										<h5 class="text-decoration-none">{{ todo.description }}</h5>
-										<p class="card-text">
-											<small>
-												do by:
-												{{ todo.dueDate|date('d-m-Y') }}
-											</small>
-										</p>
-										<p class="card-text">
-											<small>
-												Created on:
-												{{ todo.createdAt|format_datetime() }}
-											</small>
-										</p>
+				<a style="min-width: 120px;" class="btn btn-sm btn-danger me-1" href="{{path('orderBy_todo', {orderByCreation: 'dueOldiest'})}}">{{'urgent'|trans}}</a>
 
-										<a class="btn btn-sm btn-warning" href="{{path('edit_todo', {id: todo.id})}}">Edit</a>
-										<a class="btn btn-sm btn-danger" href="{{path('delete_todo', {id: todo.id})}}">Delete</a>
-									</div>
-								</div>
-							</div>
-
-						{% endif %}
-					{% endfor %}
-				</div>
 			</div>
+		</div>
+
+		<div class="row p-5">
+			{% set color = 'null' %}
+			{% for todo in todos %}
+				{% if app.user %}
+					{% if date(todo.dueDate) < date() %}
+						{% set color = 'bg-warning' %}
+					{% else %}
+						{% set color = 'none' %}
+
+					{% endif %}
+					<div class="col-4 m-1 ">
+						<div class="card border border-2 border-primary me-2 {{ color }} " style="width: 18rem;">
+							<div class="card-body">
+								<h4 class="card-title">To Do:
+								</h4>
+								{% if date(todo.dueDate) < date() %}
+									<div class="bg-dark p-2">
+										<h5 class="text-white text-center">OVER DUE!!!
+
+										</h5>
+									</div>
+								{% endif %}
+								<h5 class="text-decoration-none">{{ todo.description }}</h5>
+								<p class="card-text">
+									<small>
+										do by:
+										{{ todo.dueDate|date('d-m-Y') }}
+									</small>
+								</p>
+								<p class="card-text">
+									<small>
+										Created on:
+										{{ todo.createdAt|format_datetime() }}
+									</small>
+								</p>
+
+								<a class="btn btn-sm btn-warning" href="{{path('edit_todo', {id: todo.id})}}">{{ 'modifier'|trans }}</a>
+								<a class="btn btn-sm btn-danger" href="{{path('delete_todo', {id: todo.id})}}">{{ 'suppr'|trans }}</a>
+							</div>
+						</div>
+					</div>
+
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
 
 
-		{% endblock %}
+{% endblock %}

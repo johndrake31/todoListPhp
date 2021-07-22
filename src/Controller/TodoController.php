@@ -13,6 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ *@Route("/{_locale}")
+ */
 class TodoController extends AbstractController
 {
     /**
@@ -24,7 +27,7 @@ class TodoController extends AbstractController
 
         $todos = $user->getTodos();
 
-        switch ($orderByCreation){
+        switch ($orderByCreation) {
             case "oldiest":
                 $todos = $repo->findAllTodosSortByOldest($user);;
                 break;
@@ -32,7 +35,7 @@ class TodoController extends AbstractController
                 $todos = $repo->findAllTodosSortByNewest($user);;
                 break;
             case "dueNewiest":
-                $todos = $repo->findAllTodosSortByDueByNew($user);
+                $todos = $repo->findAllByUserSortByDuedateNew($user);
                 break;
             case "dueOldiest":
                 $todos = $repo->findAllTodosSortByDueByOld($user);
@@ -94,6 +97,6 @@ class TodoController extends AbstractController
             $em->remove($todo);
             $em->flush();
         }
-        return $this->redirect('/todo');
+        return $this->redirectToRoute('todo');
     }
 }

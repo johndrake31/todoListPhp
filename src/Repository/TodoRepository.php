@@ -48,9 +48,10 @@ class TodoRepository extends ServiceEntityRepository
     }
 
     /**
+     * @method Todo[]    findAll()
      * @return Todo[] Returns an array of Todo objects by Due Date DESC
      */
-    public function findAllTodosSortByDueByNew($value)
+    public function findAllByUserSortByDuedateNew($value)
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.user = :val')
