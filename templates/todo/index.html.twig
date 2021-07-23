@@ -57,7 +57,9 @@
 										{{ todo.createdAt|format_datetime() }}
 									</small>
 								</p>
-
+								<a href="#" class="btn btn-primary btn-sm">
+									checked/check
+								</a>
 								<a class="btn btn-sm btn-warning" href="{{path('edit_todo', {id: todo.id})}}">{{ 'modifier'|trans }}</a>
 								<a class="btn btn-sm btn-danger" href="{{path('delete_todo', {id: todo.id})}}">{{ 'suppr'|trans }}</a>
 							</div>
