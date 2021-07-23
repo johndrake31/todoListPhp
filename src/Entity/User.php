@@ -52,9 +52,15 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Checked::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $checkeds;
+
     public function __construct()
     {
         $this->todos = new ArrayCollection();
+        $this->checkeds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,6 +172,36 @@ class User implements UserInterface
     public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Checked[]
+     */
+    public function getCheckeds(): Collection
+    {
+        return $this->checkeds;
+    }
+
+    public function addChecked(Checked $checked): self
+    {
+        if (!$this->checkeds->contains($checked)) {
+            $this->checkeds[] = $checked;
+            $checked->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChecked(Checked $checked): self
+    {
+        if ($this->checkeds->removeElement($checked)) {
+            // set the owning side to null (unless already changed)
+            if ($checked->getUser() === $this) {
+                $checked->setUser(null);
+            }
+        }
 
         return $this;
     }
