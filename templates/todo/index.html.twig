@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block body %}
+
+
 	<div class="container">
 
 		<div class="row bg-dark p-2">
@@ -24,6 +26,14 @@
 
 		<div class="row p-5">
 			{% set color = 'null' %}
+			<h4>
+				Number of Task Done:
+				{{checks}}
+				/
+				{{todoLength}}
+
+			</h4>
+
 			{% for todo in todos %}
 				{% if app.user %}
 					{% if date(todo.dueDate) < date() %}
@@ -57,9 +67,18 @@
 										{{ todo.createdAt|format_datetime() }}
 									</small>
 								</p>
-								<a href="#" class="btn btn-primary btn-sm">
-									checked/check
+
+
+								<a href="{{path('checked', {id: todo.id})}}" class="checked btn btn-primary btn-sm">
+									{% if todo.getChecked %}
+										✅
+									{% else %}
+										❏
+									{% endif %}
+
 								</a>
+
+
 								<a class="btn btn-sm btn-warning" href="{{path('edit_todo', {id: todo.id})}}">{{ 'modifier'|trans }}</a>
 								<a class="btn btn-sm btn-danger" href="{{path('delete_todo', {id: todo.id})}}">{{ 'suppr'|trans }}</a>
 							</div>
@@ -76,5 +95,29 @@
 		</div>
 	</div>
 
+{% endblock %}
+{% block javascripts %}
+	<script>
 
+
+		function checkBtn() {
+			event.preventDefault();
+			alert('coucou');
+			const url = this.href;
+			fetch(url).
+			then(response => response.json()).
+			then((data) =>{
+				let msg = data.message == 'unchecked'? 'Not Done' : 'Done' ;
+				this.innerHTML = msg;
+			});
+		}
+
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const mesBTN = document.querySelectorAll('.checked');
+			mesBTN.forEach((btn) => {
+			btn.addEventListener('click', checkBtn)
+			})
+		})
+	</script>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Checked;
 use App\Entity\Todo;
 use App\Entity\User;
 use App\Form\TodoType;
@@ -13,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface as EMI;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  *@Route("/{_locale}")
@@ -27,6 +29,9 @@ class TodoController extends AbstractController
     {
 
         $todos = $user->getTodos();
+        $todoLength = count($todos);
+        $checks = count($user->getCheckeds());
+
 
         switch ($orderByCreation) {
             case "oldiest":
@@ -51,6 +56,8 @@ class TodoController extends AbstractController
 
         return $this->render('todo/index.html.twig', [
             'todos' => $pagination,
+            'checks' => $checks,
+            'todoLength' => $todoLength
         ]);
     }
 
@@ -112,6 +119,30 @@ class TodoController extends AbstractController
         if ($isAdmin) {
             return $this->redirect('/admin/todos/' . $id);
         }
-        return $this->redirect('/admin/todos/3');
+        return $this->redirectToRoute('todo');
+    }
+
+    /**
+     * 
+     * @Route("/todo/checked/{id}", name="checked")
+     */
+    public function checked(Todo $todo, EMI $em): Response
+    {
+        $checked = $todo->getChecked();
+        if (!$checked) {
+            $checked = new Checked();
+            $checked->setUser($todo->getUser());
+            $checked->setTodo($todo);
+
+            $em->persist($checked);
+            $message = "checked";
+        } else {
+            $em->remove($checked);
+            $message = "unchecked";
+        }
+        $em->flush();
+        $data = ['message' => "$message"];
+        // return $this->redirectToRoute('todo');
+        return $this->json($data, 200);
     }
 }
