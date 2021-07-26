@@ -28,7 +28,7 @@
 			{% set color = 'null' %}
 			<h4>
 				Number of Task Done:
-				{{checks}}
+				<span class="checks">{{checks}}</span>
 				/
 				{{todoLength}}
 
@@ -71,9 +71,9 @@
 
 								<a href="{{path('checked', {id: todo.id})}}" class="checked btn btn-primary btn-sm">
 									{% if todo.getChecked %}
-										✅
+										done
 									{% else %}
-										❏
+										not done
 									{% endif %}
 
 								</a>
@@ -102,7 +102,7 @@
 
 		function checkBtn() {
 			event.preventDefault();
-			alert('coucou');
+			// alert('coucou');
 			const url = this.href;
 			fetch(url).
 			then(response => response.json()).
@@ -110,6 +110,8 @@
 				console.log(data);
 				let msg = data.message == 'unchecked'? 'Not Done' : 'Done' ;
 				this.innerHTML = msg;
+				let checkCount = data.nombreDeChecks ;
+				document.querySelector('.checks').innerHTML = checkCount;
 			});
 		}
 

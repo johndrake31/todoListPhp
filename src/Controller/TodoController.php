@@ -130,6 +130,8 @@ class TodoController extends AbstractController
     {
         $checked = $todo->getChecked();
         $user = $todo->getUser();
+
+
         if (!$checked) {
             $checked = new Checked();
             $checked->setUser($todo->getUser());
@@ -143,9 +145,10 @@ class TodoController extends AbstractController
         }
         $em->flush();
 
+        $userChecks = count($user->getCheckeds());
         $data = [
             'message' => $message,
-            'user' => $user->getUsername()
+            'nombreDeChecks' => $userChecks
             ];
         // return $this->redirectToRoute('todo');
         return $this->json($data, 200);
