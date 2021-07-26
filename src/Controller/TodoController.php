@@ -129,6 +129,7 @@ class TodoController extends AbstractController
     public function checked(Todo $todo, EMI $em): Response
     {
         $checked = $todo->getChecked();
+        $user = $todo->getUser();
         if (!$checked) {
             $checked = new Checked();
             $checked->setUser($todo->getUser());
@@ -141,7 +142,11 @@ class TodoController extends AbstractController
             $message = "unchecked";
         }
         $em->flush();
-        $data = ['message' => "$message"];
+
+        $data = [
+            'message' => $message,
+            'user' => $user->getUsername()
+            ];
         // return $this->redirectToRoute('todo');
         return $this->json($data, 200);
     }

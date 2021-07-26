@@ -107,6 +107,7 @@
 			fetch(url).
 			then(response => response.json()).
 			then((data) =>{
+				console.log(data);
 				let msg = data.message == 'unchecked'? 'Not Done' : 'Done' ;
 				this.innerHTML = msg;
 			});
